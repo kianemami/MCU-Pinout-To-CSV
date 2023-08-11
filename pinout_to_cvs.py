@@ -21,7 +21,7 @@ root = tree.getroot()
 csv_file = xml_file+'.csv'
 csv_handler = open(csv_file, 'w')
 writer = csv.writer(csv_handler)
-csv_header = ['Pin', 'Name', 'Type', 'Functionality']
+csv_header = ['Pin', 'Name - Functionality', 'Type']
 writer.writerow(csv_header)
 
 
@@ -29,16 +29,20 @@ for child in root:
 
     if( child.tag.find("Pin") >= 0 ):
 
-        pin =  child.attrib['Position']   
-        type_str = child.attrib['Type']
-        name_str = child.attrib['Name']
         func_str = ''
         for item in child:
             if(item.tag.find("Signal") >= 0 ) :
                 func_str += item.attrib['Name']
                 func_str += '/'
+                
+        pin =  child.attrib['Position']   
+        type_str = child.attrib['Type']
+        
+        if func_str == '' :
+            name_str = child.attrib['Name']
+        else :
+            name_str = child.attrib['Name'] + '-' + func_str
 
-
-        writer.writerow([pin, name_str, type_str , func_str])
+        writer.writerow([pin, name_str , type_str])
 
 csv_handler.close()
