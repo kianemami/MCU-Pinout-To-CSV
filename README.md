@@ -6,3 +6,6 @@ with this script you can convert the XML pinout file from this link https://gith
 run this script by name or path : 
 
     python pinout_to_cvs.py pinout.xml or python pinout_to_cvs.py ~/home/user/pinout.xml 
+
+
+# Warning !!! double check with the Manufacturer Datasheet before using the output in your product
